@@ -17,5 +17,5 @@ LoggedOnIdentity **Logon**(Identity) - Call this method to establish a session<b
 Question **GetNewQuestion**(LoggedOnIdentity) - Call this method to obtain a new question for the LoggedOnIdentity<br>
 QuestionHistory **GetQuestionHistory**(LoggedOnIdentity) - Call this method to get a collection of questions that were already asked of this LoggedOnIdentity<br>
 Answer **GetAnswer**(Question) - Call this method to get the answer to a question<br>
-None AddQuestionAndAnswer(LoggedOnIdentity, Question, Answer) - Call this method to add a new question and answer<br>
+None **AddQuestionAndAnswer** (LoggedOnIdentity, Question, Answer) - Call this method to add a new question and answer<br>
 Maybe<Answer> **AskAQuestion**(LoggedOnIdentity, QuestionText (a string)) - Free form question asked, may or maynot return an answer<br>
