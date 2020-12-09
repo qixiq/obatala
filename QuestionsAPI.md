@@ -7,6 +7,7 @@ could be a usernanme/password maintained in obatala, or eg a Google or Facebook 
 **Session** - {Captures information about Identity that is currently connected to obatala}<br>
 **LoggedOnIdentity** {Session, Identity}<br>
 **Question** - question to answer<br>
+**QuestionAndAnswers** - a question to answer and mutiple choice answers to the question<br>
 **QuestionTags** {Topics to which Question is related}<br>
 **Anwser** {Related to a Question}<br>
 **QuestionHistory** - A sequence of Questions and results related to a LoggedOnIdentity<br>
