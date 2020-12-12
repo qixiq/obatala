@@ -14,9 +14,52 @@ could be a usernanme/password maintained in obatala, or eg a Google or Facebook 
 **Maybe<Concept>** - A structure that may contain a related Concept or nothing eg asking a question may return an answer or nothing<br>
 <br>
 ## Actions<br>
-LoggedOnIdentity **Logon**(Identity) - Call this method to establish a session<br>
-Question **GetNewQuestion**(LoggedOnIdentity) - Call this method to obtain a new question for the LoggedOnIdentity<br>
-QuestionHistory **GetQuestionHistory**(LoggedOnIdentity) - Call this method to get a collection of questions that were already asked of this LoggedOnIdentity<br>
-Answer **GetAnswer**(Question) - Call this method to get the answer to a question<br>
-None **AddQuestionAndAnswer** (LoggedOnIdentity, Question, Answer) - Call this method to add a new question and answer<br>
-Maybe<Answer> **AskAQuestion**(LoggedOnIdentity, QuestionText (a string)) - Free form question asked, may or maynot return an answer<br>
+**Login** - Call this method to establish a session<br>
+~~~
+
+Request
+GET /login?userName=<user-name>&password=<password>   -- Will currently accept any non-empty string for userName, and password is userName123.
+
+Response
+ - Success {"isError":false,"sessionId":"df9e2929-74a4-4557-ace3-607e8dbdca22","error":null} //sessionId is unique for every Login
+ - Failure {"isError":true,"sessionId":null,"error":{...}}
+~~~
+
+
+**GetQuestion**- Call this method to obtain a new question for the LoggedOnIdentity<br>
+~~~
+Request
+GET /getquestion?sessionId=<sessionId> - sessionId obtained from earlier call to login
+
+Response
+ - Success 
+ {
+      "isError":false,
+      "questionAndAnswers":
+      {
+        "question":"What is the Capital City of Niger?",
+        "questionId":"34adf2bc-faf4-4188-8c76-aa3195131b7c",
+        "answers":
+        [
+            {"choiceAlphabet":"A","answer":"Minna"},
+            {"choiceAlphabet":"B","answer":"Umuahia"},
+            {"choiceAlphabet":"C","answer":"Bauchi"},
+            {"choiceAlphabet":"D","answer":"Yola"},
+            {"choiceAlphabet":"E","answer":"Kano"}
+        ]
+      },
+      "error":nul
+}
+ - Failure {"isError":true,"questionAndAnswers":null,"error":{...}} 
+~~~
+
+
+**GetAnswer** - Call this method to get the answer to a question<br> 
+~~~
+GET /getanswer?sessionId=<sessionId>&questionId=<questionId>&answer=<A|B|C|D|E> - sessionId obtained from earlier call to login, questionId obtained from earlier call to getquestion
+
+Response
+ - Success {"isError":false,"answered":"**true**","error":null} //if <answer> in request in correct letter
+ - Success {"isError":false,"answered":"**false**","error":null} //if <answer> in request in NOT correct letter
+ - Failure {"isError":true,"answerd":false,"error":{...}}  
+~~~
