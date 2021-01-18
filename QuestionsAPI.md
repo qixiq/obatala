@@ -63,3 +63,23 @@ Response
  - Success {"isError":false,"answered":"**false**","error":null} //if <answer> in request in NOT correct letter
  - Failure {"isError":true,"answerd":false,"error":{...}}  
 ~~~
+ 
+ **BeginSignup** - Call this method to start a new signup<br> 
+~~~
+GET /beginsignup?userName=<userName>&password=<password>&emailAddress=<email>&continueFromUrl=<continue-form-url>
+
+Response
+ - Success {"isError":false,"unqiueString":<token>,"error":null} //<token> is the signup token that will be used to complete signup. An email will be sent to user
+ with a link to <continue-form-url>?token=<token>
+ - Failure {"isError":true,"answerd":false,"error":{...}}  
+~~~
+
+ **CompleteSignup** - Call this method to complete a new signup<br> 
+~~~
+GET /completesignup?userName=<username>&password=<password>&token=<token> //token would have been generated in a previous call to begin signup
+
+Response
+ - Success {"isError":false,"uniqueString":<token>,"error":null} //if <answer> in request in correct letter 
+ - Failure {"isError":true,"answerd":false,"error":{...}}  
+~~~
+
